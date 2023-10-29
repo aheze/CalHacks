@@ -27,6 +27,8 @@
 		3C7E751A2AEE4002006983F1 /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = 3C7E75192AEE4002006983F1 /* Files */; };
 		3C7E751D2AEE401F006983F1 /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 3C7E751C2AEE401F006983F1 /* SwipeActions */; };
 		3C7E751F2AEE5476006983F1 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E751E2AEE5476006983F1 /* ConfigView.swift */; };
+		3C7E75212AEE5C16006983F1 /* ReconstructionProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75202AEE5C16006983F1 /* ReconstructionProgressView.swift */; };
+		3C7E75232AEE60EB006983F1 /* ScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75222AEE60EB006983F1 /* ScanViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		3C7E75142AEE16DC006983F1 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
 		3C7E75162AEE3C90006983F1 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 		3C7E751E2AEE5476006983F1 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
+		3C7E75202AEE5C16006983F1 /* ReconstructionProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconstructionProgressView.swift; sourceTree = "<group>"; };
+		3C7E75222AEE60EB006983F1 /* ScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +91,6 @@
 				3C7E74E92AEDD0E9006983F1 /* AppDelegate.swift */,
 				3C7E74EB2AEDD0E9006983F1 /* SceneDelegate.swift */,
 				3C7E74ED2AEDD0E9006983F1 /* ViewController.swift */,
-				3C7E75012AEDE7E2006983F1 /* ViewModel.swift */,
 				3C7E750D2AEDF729006983F1 /* File.metal */,
 				3C7E75112AEE1378006983F1 /* Models */,
 				3C7E75082AEDE916006983F1 /* Shapes */,
@@ -111,6 +114,7 @@
 				3C7E751E2AEE5476006983F1 /* ConfigView.swift */,
 				3C7E75142AEE16DC006983F1 /* AddCardView.swift */,
 				3C7E75162AEE3C90006983F1 /* ScanView.swift */,
+				3C7E75202AEE5C16006983F1 /* ReconstructionProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -127,6 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				3C7E75122AEE137D006983F1 /* Card.swift */,
+				3C7E75012AEDE7E2006983F1 /* ViewModel.swift */,
+				3C7E75222AEE60EB006983F1 /* ScanViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -210,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7E75232AEE60EB006983F1 /* ScanViewModel.swift in Sources */,
 				3C7E75102AEE0F57006983F1 /* CardsView.swift in Sources */,
 				3C7E74EE2AEDD0E9006983F1 /* ViewController.swift in Sources */,
 				3C7E750C2AEDEB07006983F1 /* MainView.swift in Sources */,
@@ -220,6 +227,7 @@
 				3C7E750E2AEDF729006983F1 /* File.metal in Sources */,
 				3C7E75172AEE3C90006983F1 /* ScanView.swift in Sources */,
 				3C7E75152AEE16DC006983F1 /* AddCardView.swift in Sources */,
+				3C7E75212AEE5C16006983F1 /* ReconstructionProgressView.swift in Sources */,
 				3C7E75132AEE137D006983F1 /* Card.swift in Sources */,
 				3C7E75002AEDD11E006983F1 /* Utilities.swift in Sources */,
 				3C7E75022AEDE7E2006983F1 /* ViewModel.swift in Sources */,
