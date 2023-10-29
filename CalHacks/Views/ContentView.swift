@@ -26,6 +26,9 @@ struct ContentView: View {
 //                .colorEffect(ShaderLibrary.checkerboard(.float(10), .color(.blue)))
 //                .colorEffect(ShaderLibrary.checker)
         }
+        .foregroundColor(.white)
+        .textCase(.uppercase)
+        .fontWeight(.heavy)
         .transition(.opacity)
     }
 }

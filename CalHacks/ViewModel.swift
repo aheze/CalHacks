@@ -7,8 +7,14 @@
 
 import SwiftUI
 
+enum Tab {
+    case cards
+    case battle
+    case config
+}
+
 class ViewModel: ObservableObject {
     @Published var entered = false
-    
-    
+    @Published var selectedTab = Tab.cards
+    @Published var cards = [Card.placeholderCard]
 }

@@ -14,7 +14,14 @@ struct MainView: View {
         VStack(spacing: 0) {
             
             VStack {
-                
+                switch model.selectedTab {
+                case .cards:
+                    CardsView(model: model)
+                case .battle:
+                    CardsView(model: model)
+                case .config:
+                    CardsView(model: model)
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
@@ -24,8 +31,8 @@ struct MainView: View {
                 .frame(height: 2)
             
             HStack(spacing: 0) {
-                TabButton(title: "Cards", image: "Cards") {
-                    
+                TabButton(title: "Cards", image: "Cards", selected: model.selectedTab == .cards) {
+                    model.selectedTab = .cards
                 }
                 
                 Rectangle()
@@ -34,8 +41,18 @@ struct MainView: View {
                     .frame(width: 2)
                     .ignoresSafeArea()
                 
-                TabButton(title: "Battle", image: "Swords") {
-                    
+                TabButton(title: "Battle", image: "Swords", selected: model.selectedTab == .battle) {
+                    model.selectedTab = .battle
+                }
+                
+                Rectangle()
+                    .foregroundColor(Color.black)
+                    .brightness(0.3)
+                    .frame(width: 2)
+                    .ignoresSafeArea()
+                
+                TabButton(title: "Config", image: "Gears", selected: model.selectedTab == .config) {
+                    model.selectedTab = .config
                 }
             }
             .fixedSize(horizontal: false, vertical: true)
@@ -55,6 +72,7 @@ struct MainView: View {
 struct TabButton: View {
     var title: String
     var image: String
+    var selected: Bool
     var action: (() -> Void)
     
     var body: some View {
@@ -67,7 +85,7 @@ struct TabButton: View {
                 
                 Text(title)
                     .textCase(.uppercase)
-                    .font(.title2)
+                    .font(.title3)
                     .fontWeight(.heavy)
                     .fontDesign(.monospaced)
             }
@@ -75,6 +93,20 @@ struct TabButton: View {
             .frame(maxWidth: .infinity)
             .padding(.top, 16)
             .padding(.bottom, 8)
+            .background {
+                if selected {
+                    LinearGradient(
+                        colors: [
+                            Color.white,
+                            Color.green
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                        .opacity(0.1)
+                        .ignoresSafeArea()
+                }
+            }
             .contentShape(Rectangle())
         }
     }
