@@ -27,7 +27,6 @@ struct ContentView: View {
 //                .colorEffect(ShaderLibrary.checker)
         }
         .foregroundColor(.white)
-        .textCase(.uppercase)
         .fontWeight(.heavy)
         .transition(.opacity)
     }

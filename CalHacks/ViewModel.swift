@@ -16,5 +16,5 @@ enum Tab {
 class ViewModel: ObservableObject {
     @Published var entered = false
     @Published var selectedTab = Tab.cards
-    @Published var cards = [Card.placeholderCard]
+    @Published var cards = [Card.placeholderCard1, Card.placeholderCard2]
 }

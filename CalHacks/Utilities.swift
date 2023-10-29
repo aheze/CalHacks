@@ -102,3 +102,158 @@ extension UIColor {
         return Color(self)
     }
 }
+
+
+/// get gradient color for search bar field
+extension UIColor {
+    var rgb: (r: CGFloat, g: CGFloat, b: CGFloat) {
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        if self.getRed(&r, green: &g, blue: &b, alpha: &a) {
+            return (r: r, g: g, b: b)
+        } else {
+            return (0, 0, 0)
+        }
+    }
+
+    var hsba: (h: CGFloat, s: CGFloat, b: CGFloat, a: CGFloat) {
+        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        return (h: h, s: s, b: b, a: a)
+    }
+
+    /// get a gradient color
+    func offset(by offset: CGFloat) -> UIColor {
+        let (h, s, b, a) = hsba
+        var newHue = h - offset
+
+        /// make it go back to positive
+        while newHue <= 0 {
+            newHue += 1
+        }
+        let normalizedHue = newHue.truncatingRemainder(dividingBy: 1)
+        return UIColor(hue: normalizedHue, saturation: s, brightness: b, alpha: a)
+    }
+
+    /// darken or lighten
+    func adjust(by offset: CGFloat) -> UIColor {
+        let (r, g, b) = rgb
+        let newR = r + offset
+        let newG = g + offset
+        let newB = b + offset
+
+        return UIColor(red: newR, green: newG, blue: newB, alpha: 1)
+    }
+}
+
+extension Comparable {
+    /// used for the UIColor
+    func clamped(to limits: ClosedRange<Self>) -> Self {
+        return min(max(self, limits.lowerBound), limits.upperBound)
+    }
+}
+
+extension UIColor {
+    /// make a color more visible
+    func getTextColor(
+        backgroundIsDark: Bool,
+        threshold: CGFloat? = nil,
+        toBlackPercentage: CGFloat = 0.6, /// how much to make it black
+        toWhitePercentage: CGFloat = 0.8
+    ) -> UIColor {
+        let isLight = isLight(threshold: threshold)
+        if isLight, !backgroundIsDark {
+            let adjustedTextColor = toColor(.black, percentage: toBlackPercentage)
+            return adjustedTextColor
+        } else if !isLight, backgroundIsDark {
+            let adjustedTextColor = toColor(.white, percentage: toWhitePercentage)
+            return adjustedTextColor
+        } else {
+            return self
+        }
+    }
+
+    /**
+     A color that stands out in the background
+     White in light mode -> black
+     White in dark mode -> white still
+     Pink in light mode -> dark pink
+     Pink in dark mode -> pink still
+     */
+    var controlColor: UIColor {
+        let color = UIColor { traits in
+            if traits.userInterfaceStyle == .dark {
+                return self.getTextColor(backgroundIsDark: true, toBlackPercentage: 0.3, toWhitePercentage: 0.4)
+            } else {
+                return self.getTextColor(backgroundIsDark: false, toBlackPercentage: 0.3, toWhitePercentage: 0.4)
+            }
+        }
+
+        return color
+    }
+
+    /// extra contrast
+    func controlContrastColor(coefficient: CGFloat = 1) -> UIColor {
+        let color = UIColor { traits in
+            if traits.userInterfaceStyle == .dark {
+                return self.getAdjustedColor(backgroundIsDark: true, coefficient: coefficient)
+            } else {
+                return self.getAdjustedColor(backgroundIsDark: false, coefficient: coefficient)
+            }
+        }
+
+        return color
+    }
+
+    func getAdjustedColor(backgroundIsDark: Bool, coefficient: CGFloat) -> UIColor {
+        let brightness = getBrightness()
+
+        if backgroundIsDark {
+            let percentage = 1 - brightness
+            let adjustedTextColor = toColor(.white, percentage: percentage * coefficient)
+            return adjustedTextColor
+        } else {
+            let percentage = brightness
+            let adjustedTextColor = toColor(.black, percentage: percentage * coefficient)
+            return adjustedTextColor
+        }
+    }
+
+    func getBrightness() -> CGFloat {
+        let (r, g, b) = rgb
+        let brightness = CGFloat(
+            ((r * 299) + (g * 587) + (b * 114)) / 1000
+        )
+        return brightness
+    }
+
+    func isLight(threshold: CGFloat? = nil) -> Bool {
+        let threshold = threshold ?? CGFloat(0.55)
+        let brightness = getBrightness()
+
+        return (brightness > threshold)
+    }
+}
+
+
+/// from https://stackoverflow.com/a/46729248/14351818
+extension UIColor {
+    func toColor(_ color: UIColor, percentage: CGFloat) -> UIColor {
+        let percentage = max(min(percentage, 1), 0)
+        switch percentage {
+        case 0: return self
+        case 1: return color
+        default:
+            var (r1, g1, b1, a1): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+            var (r2, g2, b2, a2): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+            guard getRed(&r1, green: &g1, blue: &b1, alpha: &a1) else { return self }
+            guard color.getRed(&r2, green: &g2, blue: &b2, alpha: &a2) else { return self }
+
+            return UIColor(
+                red: CGFloat(r1 + (r2 - r1) * percentage),
+                green: CGFloat(g1 + (g2 - g1) * percentage),
+                blue: CGFloat(b1 + (b2 - b1) * percentage),
+                alpha: CGFloat(a1 + (a2 - a1) * percentage)
+            )
+        }
+    }
+}
