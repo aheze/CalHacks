@@ -17,4 +17,5 @@ class ViewModel: ObservableObject {
     @Published var entered = false
     @Published var selectedTab = Tab.cards
     @Published var cards = [Card.placeholderCard1, Card.placeholderCard2]
+    @Published var cardsStore = [Card.placeholderCard1, Card.placeholderCard2]
 }

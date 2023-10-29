@@ -24,37 +24,41 @@ struct MainView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
-            Rectangle()
-                .foregroundColor(Color.black)
-                .brightness(0.3)
-                .frame(height: 2)
-            
-            HStack(spacing: 0) {
-                TabButton(title: "Cards", image: "Cards", selected: model.selectedTab == .cards) {
-                    model.selectedTab = .cards
-                }
-                
+            VStack(spacing: 0) {
                 Rectangle()
                     .foregroundColor(Color.black)
                     .brightness(0.3)
-                    .frame(width: 2)
-                    .ignoresSafeArea()
+                    .frame(height: 2)
                 
-                TabButton(title: "Battle", image: "Swords", selected: model.selectedTab == .battle) {
-                    model.selectedTab = .battle
+                HStack(spacing: 0) {
+                    TabButton(title: "Cards", image: "Cards", selected: model.selectedTab == .cards) {
+                        model.selectedTab = .cards
+                    }
+                    
+                    Rectangle()
+                        .foregroundColor(Color.black)
+                        .brightness(0.3)
+                        .frame(width: 2)
+                        .ignoresSafeArea()
+                    
+                    TabButton(title: "Battle", image: "Swords", selected: model.selectedTab == .battle) {
+                        model.selectedTab = .battle
+                    }
+                    
+                    Rectangle()
+                        .foregroundColor(Color.black)
+                        .brightness(0.3)
+                        .frame(width: 2)
+                        .ignoresSafeArea()
+                    
+                    TabButton(title: "Config", image: "Gears", selected: model.selectedTab == .config) {
+                        model.selectedTab = .config
+                    }
                 }
-                
-                Rectangle()
-                    .foregroundColor(Color.black)
-                    .brightness(0.3)
-                    .frame(width: 2)
-                    .ignoresSafeArea()
-                
-                TabButton(title: "Config", image: "Gears", selected: model.selectedTab == .config) {
-                    model.selectedTab = .config
-                }
+                .fixedSize(horizontal: false, vertical: true)
             }
-            .fixedSize(horizontal: false, vertical: true)
+            .offset(y: model.entered ? 0 : 200)
+            .animation(.spring(response: 0.7, dampingFraction: 1, blendDuration: 1).delay(0.65), value: model.entered)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .scaleEffect(model.entered ? 1 : 1.2)
@@ -62,7 +66,7 @@ struct MainView: View {
         .animation(.spring(response: 0.5, dampingFraction: 1, blendDuration: 1).delay(0.5), value: model.entered)
         .background {
             Color.black
-                .brightness(0.2)
+                .brightness(0.1)
                 .ignoresSafeArea()
         }
     }

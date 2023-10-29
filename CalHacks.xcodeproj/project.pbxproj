@@ -22,6 +22,7 @@
 		3C7E750E2AEDF729006983F1 /* File.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E750D2AEDF729006983F1 /* File.metal */; };
 		3C7E75102AEE0F57006983F1 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E750F2AEE0F57006983F1 /* CardsView.swift */; };
 		3C7E75132AEE137D006983F1 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75122AEE137D006983F1 /* Card.swift */; };
+		3C7E75152AEE16DC006983F1 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75142AEE16DC006983F1 /* AddCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		3C7E750D2AEDF729006983F1 /* File.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = File.metal; sourceTree = "<group>"; };
 		3C7E750F2AEE0F57006983F1 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		3C7E75122AEE137D006983F1 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		3C7E75142AEE16DC006983F1 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				3C7E75062AEDE84B006983F1 /* OriginView.swift */,
 				3C7E750B2AEDEB07006983F1 /* MainView.swift */,
 				3C7E750F2AEE0F57006983F1 /* CardsView.swift */,
+				3C7E75142AEE16DC006983F1 /* AddCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				3C7E74FE2AEDD0F3006983F1 /* ContentView.swift in Sources */,
 				3C7E75072AEDE84B006983F1 /* OriginView.swift in Sources */,
 				3C7E750E2AEDF729006983F1 /* File.metal in Sources */,
+				3C7E75152AEE16DC006983F1 /* AddCardView.swift in Sources */,
 				3C7E75132AEE137D006983F1 /* Card.swift in Sources */,
 				3C7E75002AEDD11E006983F1 /* Utilities.swift in Sources */,
 				3C7E75022AEDE7E2006983F1 /* ViewModel.swift in Sources */,

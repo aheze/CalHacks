@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CardsView: View {
     @ObservedObject var model: ViewModel
+    @State var isPresented = false
     
     var body: some View {
         VStack {
@@ -18,15 +19,20 @@ struct CardsView: View {
             
             ScrollView {
                 LazyVStack(spacing: 20) {
-                    ForEach(model.cards) { card in
+                    ForEach(Array(zip(model.cards.indices, model.cards)), id: \.1.id) { index, card in
                         CardView(card: card)
+                            .scaleEffect(model.entered ? 1 : 0.9)
+                            .opacity(model.entered ? 1 : 0)
+                            .animation(.spring(response: 0.2, dampingFraction: 1, blendDuration: 1).delay(Double(index) * 0.1 + 0.55), value: model.entered)
                     }
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 32)
             }
             .safeAreaInset(edge: .bottom) {
-                Button {} label: {
+                Button {
+                    isPresented = true
+                } label: {
                     Image(systemName: "plus")
                         .font(.largeTitle)
                         .fontWeight(.bold)
@@ -45,6 +51,9 @@ struct CardsView: View {
             }
         }
         .padding(.top, 32)
+        .sheet(isPresented: $isPresented) {
+            AddCardView(model: model)
+        }
     }
 }
 
