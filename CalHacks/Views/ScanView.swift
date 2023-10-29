@@ -13,35 +13,66 @@ import SwiftUI
 @MainActor class ScanViewModel: ObservableObject {
     @Published var session: ObjectCaptureSession?
 
-    
-    func reset() {
+    let snapshotsFolder = try! Folder.documents!.createSubfolderIfNeeded(withName: "Snapshots")
+    let imagesFolder = try! Folder.documents!.createSubfolderIfNeeded(withName: "Images")
+
+    func resetFolders() {
         print("Resetting!")
-        
-        if let folder = try? Folder.documents!.subfolder(named: "Snapshots") {
-            for file in folder.files {
-                try? file.delete()
+
+        for file in snapshotsFolder.files {
+            do {
+                try file.delete()
+            } catch {
+                print("Error deleting snap file: \(error)")
             }
-        } else {
-            print("No subfolder!")
+        }
+        
+        for folder in snapshotsFolder.subfolders {
+            do {
+                try folder.delete()
+            } catch {
+                print("Error deleting snap folder: \(error)")
+            }
         }
 
-        if let folder = try? Folder.documents!.subfolder(named: "Images") {
-            for file in folder.files {
-                try? file.delete()
+        for file in imagesFolder.files {
+            do {
+                try file.delete()
+            } catch {
+                print("Error deleting image file: \(error)")
             }
-        } else {
-            print("No subfolder images!")
+        }
+        
+        for folder in imagesFolder.subfolders {
+            do {
+                try folder.delete()
+            } catch {
+                print("Error deleting image folder: \(error)")
+            }
         }
     }
-    func start() {
-        reset()
-        var configuration = ObjectCaptureSession.Configuration()
-        configuration.checkpointDirectory = Folder.documents!.url.appendingPathComponent("Snapshots/")
 
+    func start() {
+        resetFolders()
+        
+        print("snapshotsFolder: \(snapshotsFolder.files.count())")
+
+        var configuration = ObjectCaptureSession.Configuration()
+        configuration.checkpointDirectory = snapshotsFolder.url
+
+        print("Created config")
         let session = ObjectCaptureSession()
-        session.start(imagesDirectory: Folder.documents!.url.appendingPathComponent("Images/"),
-                      configuration: configuration)
+
+        print("Created session")
+        session.start(
+            imagesDirectory: imagesFolder.url,
+            configuration: configuration
+        )
+
+        print("Started session")
         self.session = session
+
+        print("Set session!")
 
 //        Task {
 //            for await update in session.stateUpdates {
@@ -54,7 +85,7 @@ import SwiftUI
 //                    self.session = ObjectCaptureSession()
 //                }
 //            }
-//            
+//
 //            for await update in session.feedbackUpdates {
 //                print("Up: \(update)")
 //            }
@@ -84,18 +115,27 @@ struct ScanView: View {
             Color.black
                 .ignoresSafeArea()
         }
+        .overlay {
+            VStack {
+                if scanViewModel.session?.userCompletedScanPass ?? false {
+                    Text("Completed!")
+                }
+            }
+        }
         .overlay(alignment: .top) {
             let showReset = switch scanViewModel.session?.state {
             case .initializing, .ready, .none:
-                    false
-                default:
-                    true
+                false
+            default:
+                true
             }
 
             HStack(spacing: 12) {
                 if showReset {
                     Button {
                         scanViewModel.session?.resetDetection()
+                        scanViewModel.session = nil
+                        scanViewModel.start()
                     } label: {
                         Text("Reset")
                             .foregroundColor(.white)
@@ -108,10 +148,31 @@ struct ScanView: View {
                                     }
                             }
                     }
+                    .geometryGroup()
                 }
 
-                Button {
-                    switch scanViewModel.session?.state {
+                let string: String? = switch scanViewModel.session?.state {
+                case .initializing:
+                    "Loading..."
+                case .ready:
+                    "Start Detecting"
+                case .detecting:
+                    "Start Capture"
+                case .capturing:
+                    "Capturing..."
+                case .finishing:
+                    "Finishing..."
+                case .completed:
+                    "Completed!"
+                case .failed(let error):
+                    "Fail: \(error)"
+                default:
+                    nil
+                }
+
+                if let string {
+                    Button {
+                        switch scanViewModel.session?.state {
                         case .initializing:
                             break
                         case .ready:
@@ -129,41 +190,25 @@ struct ScanView: View {
                             break
                         default:
                             break
-                    }
-                } label: {
-                    let string: String = switch scanViewModel.session?.state {
-                        case .initializing:
-                            "Loading..."
-                        case .ready:
-                            "Start Detecting"
-                        case .detecting:
-                            "Start Capture"
-                        case .capturing:
-                            "Capturing..."
-                        case .finishing:
-                            "Finishing..."
-                        case .completed:
-                            "Completed!"
-                        case .failed(let error):
-                            "Fail: \(error)"
-                        default:
-                            ""
-                    }
-
-                    Text(string)
-                        .foregroundColor(.white)
-                        .padding(.vertical, 16)
-                        .padding(.horizontal, 20)
-                        .background {
-                            VisualEffectView(.systemThickMaterialDark)
-                                .mask {
-                                    RoundedRectangle(cornerRadius: 16)
-                                }
                         }
+                    } label: {
+                        Text(string)
+                            .foregroundColor(.white)
+                            .padding(.vertical, 16)
+                            .padding(.horizontal, 20)
+                            .background {
+                                Color.green
+                                    .brightness(-0.1)
+                                    .mask {
+                                        RoundedRectangle(cornerRadius: 16)
+                                    }
+                            }
+                    }
+                    .geometryGroup()
                 }
-                
+
                 Spacer()
-                
+
                 Button {
                     dismiss()
                 } label: {
@@ -206,8 +251,9 @@ struct CapturePrimaryView: View {
         if let session = scanViewModel.session {
             ObjectCaptureView(session: session)
         } else {
-            Text("No session")
-                .foregroundStyle(.red)
+            Text("Loading session...")
+                .foregroundStyle(.green)
+                .offset(y: 60)
         }
     }
 }

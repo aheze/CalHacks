@@ -26,6 +26,7 @@
 		3C7E75172AEE3C90006983F1 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75162AEE3C90006983F1 /* ScanView.swift */; };
 		3C7E751A2AEE4002006983F1 /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = 3C7E75192AEE4002006983F1 /* Files */; };
 		3C7E751D2AEE401F006983F1 /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 3C7E751C2AEE401F006983F1 /* SwipeActions */; };
+		3C7E751F2AEE5476006983F1 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E751E2AEE5476006983F1 /* ConfigView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		3C7E75122AEE137D006983F1 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		3C7E75142AEE16DC006983F1 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
 		3C7E75162AEE3C90006983F1 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
+		3C7E751E2AEE5476006983F1 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				3C7E75062AEDE84B006983F1 /* OriginView.swift */,
 				3C7E750B2AEDEB07006983F1 /* MainView.swift */,
 				3C7E750F2AEE0F57006983F1 /* CardsView.swift */,
+				3C7E751E2AEE5476006983F1 /* ConfigView.swift */,
 				3C7E75142AEE16DC006983F1 /* AddCardView.swift */,
 				3C7E75162AEE3C90006983F1 /* ScanView.swift */,
 			);
@@ -213,6 +216,7 @@
 				3C7E74EA2AEDD0E9006983F1 /* AppDelegate.swift in Sources */,
 				3C7E74FE2AEDD0F3006983F1 /* ContentView.swift in Sources */,
 				3C7E75072AEDE84B006983F1 /* OriginView.swift in Sources */,
+				3C7E751F2AEE5476006983F1 /* ConfigView.swift in Sources */,
 				3C7E750E2AEDF729006983F1 /* File.metal in Sources */,
 				3C7E75172AEE3C90006983F1 /* ScanView.swift in Sources */,
 				3C7E75152AEE16DC006983F1 /* AddCardView.swift in Sources */,

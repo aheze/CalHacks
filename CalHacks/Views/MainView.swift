@@ -19,7 +19,7 @@ struct MainView: View {
                 case .battle:
                     CardsView(model: model)
                 case .config:
-                    CardsView(model: model)
+                    ConfigView(model: model)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
