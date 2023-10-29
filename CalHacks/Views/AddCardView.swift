@@ -12,8 +12,11 @@ struct AddCardView: View {
     @Environment(\.dismiss) var dismiss
     @State var shown = false
 
+    @State var loading = false
+    @State var isPresented = false
+
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 36) {
             VStack {
                 HStack {
                     Text("Add Card")
@@ -37,9 +40,30 @@ struct AddCardView: View {
                     }
                 }
 
-                Button {} label: {
+                Button {
+                    withAnimation {
+                        loading = true
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        isPresented = true
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        withAnimation {
+                            loading = false
+                        }
+                    }
+                } label: {
                     VStack(spacing: 24) {
                         Image(systemName: "camera.fill")
+                            .opacity(loading ? 0 : 1)
+                            .overlay {
+                                ProgressView()
+                                    .controlSize(.large)
+                                    .opacity(loading ? 1 : 0)
+                                    .environment(\.colorScheme, .dark)
+                            }
 
                         Text("Scan with Camera")
                             .textCase(.uppercase)
@@ -96,6 +120,9 @@ struct AddCardView: View {
             Color.black
                 .brightness(0.1)
                 .ignoresSafeArea()
+        }
+        .fullScreenCover(isPresented: $isPresented) {
+            ScanView(model: model)
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {

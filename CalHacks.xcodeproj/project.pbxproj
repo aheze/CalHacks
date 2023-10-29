@@ -23,6 +23,9 @@
 		3C7E75102AEE0F57006983F1 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E750F2AEE0F57006983F1 /* CardsView.swift */; };
 		3C7E75132AEE137D006983F1 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75122AEE137D006983F1 /* Card.swift */; };
 		3C7E75152AEE16DC006983F1 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75142AEE16DC006983F1 /* AddCardView.swift */; };
+		3C7E75172AEE3C90006983F1 /* ScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75162AEE3C90006983F1 /* ScanView.swift */; };
+		3C7E751A2AEE4002006983F1 /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = 3C7E75192AEE4002006983F1 /* Files */; };
+		3C7E751D2AEE401F006983F1 /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 3C7E751C2AEE401F006983F1 /* SwipeActions */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,7 @@
 		3C7E750F2AEE0F57006983F1 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		3C7E75122AEE137D006983F1 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		3C7E75142AEE16DC006983F1 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
+		3C7E75162AEE3C90006983F1 /* ScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C7E751A2AEE4002006983F1 /* Files in Frameworks */,
+				3C7E751D2AEE401F006983F1 /* SwipeActions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +107,7 @@
 				3C7E750B2AEDEB07006983F1 /* MainView.swift */,
 				3C7E750F2AEE0F57006983F1 /* CardsView.swift */,
 				3C7E75142AEE16DC006983F1 /* AddCardView.swift */,
+				3C7E75162AEE3C90006983F1 /* ScanView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -137,6 +144,10 @@
 			dependencies = (
 			);
 			name = CalHacks;
+			packageProductDependencies = (
+				3C7E75192AEE4002006983F1 /* Files */,
+				3C7E751C2AEE401F006983F1 /* SwipeActions */,
+			);
 			productName = CalHacks;
 			productReference = 3C7E74E62AEDD0E9006983F1 /* CalHacks.app */;
 			productType = "com.apple.product-type.application";
@@ -165,6 +176,10 @@
 				Base,
 			);
 			mainGroup = 3C7E74DD2AEDD0E9006983F1;
+			packageReferences = (
+				3C7E75182AEE4002006983F1 /* XCRemoteSwiftPackageReference "Files" */,
+				3C7E751B2AEE401F006983F1 /* XCRemoteSwiftPackageReference "SwipeActions" */,
+			);
 			productRefGroup = 3C7E74E72AEDD0E9006983F1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -199,6 +214,7 @@
 				3C7E74FE2AEDD0F3006983F1 /* ContentView.swift in Sources */,
 				3C7E75072AEDE84B006983F1 /* OriginView.swift in Sources */,
 				3C7E750E2AEDF729006983F1 /* File.metal in Sources */,
+				3C7E75172AEE3C90006983F1 /* ScanView.swift in Sources */,
 				3C7E75152AEE16DC006983F1 /* AddCardView.swift in Sources */,
 				3C7E75132AEE137D006983F1 /* Card.swift in Sources */,
 				3C7E75002AEDD11E006983F1 /* Utilities.swift in Sources */,
@@ -359,6 +375,7 @@
 				DEVELOPMENT_TEAM = WV6XDLHK3W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CalHacks/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use the camera to scan objects!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -387,6 +404,7 @@
 				DEVELOPMENT_TEAM = WV6XDLHK3W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CalHacks/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use the camera to scan objects!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -427,6 +445,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3C7E75182AEE4002006983F1 /* XCRemoteSwiftPackageReference "Files" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Files";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
+		3C7E751B2AEE401F006983F1 /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aheze/SwipeActions";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3C7E75192AEE4002006983F1 /* Files */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C7E75182AEE4002006983F1 /* XCRemoteSwiftPackageReference "Files" */;
+			productName = Files;
+		};
+		3C7E751C2AEE401F006983F1 /* SwipeActions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C7E751B2AEE401F006983F1 /* XCRemoteSwiftPackageReference "SwipeActions" */;
+			productName = SwipeActions;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3C7E74DE2AEDD0E9006983F1 /* Project object */;
 }

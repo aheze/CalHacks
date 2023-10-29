@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "files",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JohnSundell/Files",
+      "state" : {
+        "revision" : "d273b5b7025d386feef79ef6bad7de762e106eaf",
+        "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "swipeactions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aheze/SwipeActions",
+      "state" : {
+        "revision" : "41e6f6dce02d8cfa164f8c5461a41340850ca3ab",
+        "version" : "1.1.0"
+      }
+    }
+  ],
+  "version" : 2
+}
