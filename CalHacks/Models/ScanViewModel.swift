@@ -5,6 +5,7 @@
 //  Created by Andrew Zheng on 10/29/23.
 //
 
+import Combine
 import Files
 import RealityKit
 import SwiftUI
@@ -20,6 +21,7 @@ let modelsFolder = try! Folder.documents!.createSubfolderIfNeeded(withName: "Mod
     @Published var photogrammetrySession: PhotogrammetrySession?
     @Published var filename = "\(UUID().uuidString).usdz"
     @Published var outputFile: URL!
+    var processSession = PassthroughSubject<Void, Never>()
 
     init() {
         outputFile = modelsFolder.url.appendingPathComponent(filename)
@@ -66,16 +68,22 @@ let modelsFolder = try! Folder.documents!.createSubfolderIfNeeded(withName: "Mod
 
         var configuration = PhotogrammetrySession.Configuration()
         configuration.checkpointDirectory = snapshotsFolder.url
-        
+
         do {
+            withAnimation {
+                finished = true
+            }
+
+            let timer = TimeElapsed()
+            print("Starting photogrammetrySession")
             photogrammetrySession = try PhotogrammetrySession(
                 input: imagesFolder.url,
                 configuration: configuration
             )
+            print("Created sessino: \(timer)")
             
-            withAnimation {
-                finished = true
-            }
+            processSession.send()
+
         } catch {
             print("Error: \(error)")
         }
@@ -102,22 +110,5 @@ let modelsFolder = try! Folder.documents!.createSubfolderIfNeeded(withName: "Mod
         self.session = session
 
         print("Set session!")
-
-//        Task {
-//            for await update in session.stateUpdates {
-//                print("UPdate: \(update)")
-//
-//                if case .failed(let error) = update {
-//                    print("Failed!")
-//                    self.reset()
-//                    self.session = nil
-//                    self.session = ObjectCaptureSession()
-//                }
-//            }
-//
-//            for await update in session.feedbackUpdates {
-//                print("Up: \(update)")
-//            }
-//        }
     }
 }

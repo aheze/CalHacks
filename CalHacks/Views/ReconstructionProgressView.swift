@@ -15,6 +15,7 @@ struct ReconstructionProgressView: View {
     let outputFile: URL
     @State var completed = false
     @State var cancelled = false
+    
 
     @State private var progress: Float = 0
     @State private var estimatedRemainingTime: TimeInterval?
@@ -33,14 +34,10 @@ struct ReconstructionProgressView: View {
         return !completed && !gotError && !cancelled
     }
 
-    func restart() {
-        
-    }
-    
-    func view() {
-        
-    }
-    
+    func restart() {}
+
+    func view() {}
+
     var body: some View {
         VStack(spacing: 0) {
             if isReconstructing() {
@@ -90,13 +87,20 @@ struct ReconstructionProgressView: View {
             },
             message: {}
         )
-        .task {
-            
-            
-            assert(scanViewModel.photogrammetrySession != nil)
-            let session = scanViewModel.photogrammetrySession!
+        .onReceive(scanViewModel.processSession) { _ in
+            process()
+        }
+    }
+    
+    func process() {
+        Task {
+            guard let session = scanViewModel.photogrammetrySession else {
+                print("NO session!''")
+                return
+            }
+
             let outputs = UntilProcessingCompleteFilter(input: session.outputs)
-            
+
             do {
                 try session.process(requests: [.modelFile(url: outputFile)])
             } catch {
@@ -137,7 +141,7 @@ struct ReconstructionProgressView: View {
                         }
                     case .processingCancelled:
                         cancelled = true
-                    restart()
+                        restart()
                     case .invalidSample(id: _, reason: _), .skippedSample(id: _), .automaticDownsampling:
                         continue
                     case .stitchingIncomplete:
@@ -183,7 +187,6 @@ private struct TitleView: View {
         static let processingTitle = "Processing title (Object Capture)"
     }
 }
-
 
 struct ProgressBarView: View {
     // The progress value from 0 to 1 which describes how much coverage is done.
@@ -258,7 +261,7 @@ struct ProgressBarView: View {
         }
     }
 
-    private struct LocalizedString {
+    private enum LocalizedString {
         static let processing = "Processing (Object Capture)"
 
         static let processingModelDescription = "Keep app running while processing. (Object Capture)"
@@ -270,7 +273,8 @@ struct ProgressBarView: View {
 }
 
 struct UntilProcessingCompleteFilter<Base>: AsyncSequence,
-                                            AsyncIteratorProtocol where Base: AsyncSequence, Base.Element == PhotogrammetrySession.Output {
+    AsyncIteratorProtocol where Base: AsyncSequence, Base.Element == PhotogrammetrySession.Output
+{
     func makeAsyncIterator() -> UntilProcessingCompleteFilter {
         return self
     }
