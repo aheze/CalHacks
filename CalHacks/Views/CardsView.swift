@@ -17,13 +17,31 @@ struct CardsView: View {
                 .textCase(.uppercase)
             
             ScrollView {
-                LazyVStack(spacing: 16) {
+                LazyVStack(spacing: 20) {
                     ForEach(model.cards) { card in
                         CardView(card: card)
                     }
                 }
                 .padding(.horizontal, 20)
-                .padding(.bottom, 100)
+                .padding(.bottom, 32)
+            }
+            .safeAreaInset(edge: .bottom) {
+                Button {} label: {
+                    Image(systemName: "plus")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(width: 80, height: 80)
+                        .background {
+                            VisualEffectView(.regular)
+                                .mask {
+                                    Circle()
+                                }
+                                .shadow(color: .black.opacity(0.5), radius: 16, x: 0, y: 16)
+                        }
+                }
+                .padding(.top, 10)
+                .padding(.bottom, 24)
             }
         }
         .padding(.top, 32)

@@ -12,7 +12,6 @@ struct MainView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
             VStack {
                 switch model.selectedTab {
                 case .cards:
@@ -73,10 +72,14 @@ struct TabButton: View {
     var title: String
     var image: String
     var selected: Bool
-    var action: (() -> Void)
+    var action: () -> Void
     
     var body: some View {
-        Button(action: action) {
+        Button {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+            action()
+        } label: {
             VStack(spacing: 10) {
                 Image(image)
                     .resizable()
@@ -103,8 +106,8 @@ struct TabButton: View {
                         startPoint: .top,
                         endPoint: .bottom
                     )
-                        .opacity(0.1)
-                        .ignoresSafeArea()
+                    .opacity(0.1)
+                    .ignoresSafeArea()
                 }
             }
             .contentShape(Rectangle())

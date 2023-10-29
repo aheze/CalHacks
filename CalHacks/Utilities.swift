@@ -257,3 +257,22 @@ extension UIColor {
         }
     }
 }
+
+/// Use UIKit blurs in SwiftUI.
+struct VisualEffectView: UIViewRepresentable {
+    /// The blur's style.
+    public var style: UIBlurEffect.Style
+
+    /// Use UIKit blurs in SwiftUI.
+    public init(_ style: UIBlurEffect.Style) {
+        self.style = style
+    }
+
+    public func makeUIView(context: Context) -> UIVisualEffectView {
+        UIVisualEffectView()
+    }
+
+    public func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = UIBlurEffect(style: style)
+    }
+}

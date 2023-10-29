@@ -21,6 +21,8 @@ struct OriginView: View {
             Spacer()
 
             Button {
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
                 model.entered = true
             } label: {
                 Text("Play")
