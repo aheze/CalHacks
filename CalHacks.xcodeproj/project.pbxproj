@@ -15,6 +15,11 @@
 		3C7E74F62AEDD0EA006983F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E74F42AEDD0EA006983F1 /* LaunchScreen.storyboard */; };
 		3C7E74FE2AEDD0F3006983F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E74FD2AEDD0F3006983F1 /* ContentView.swift */; };
 		3C7E75002AEDD11E006983F1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E74FF2AEDD11E006983F1 /* Utilities.swift */; };
+		3C7E75022AEDE7E2006983F1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75012AEDE7E2006983F1 /* ViewModel.swift */; };
+		3C7E75072AEDE84B006983F1 /* OriginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75062AEDE84B006983F1 /* OriginView.swift */; };
+		3C7E750A2AEDE91A006983F1 /* SlantShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E75092AEDE91A006983F1 /* SlantShape.swift */; };
+		3C7E750C2AEDEB07006983F1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E750B2AEDEB07006983F1 /* MainView.swift */; };
+		3C7E750E2AEDF729006983F1 /* File.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E750D2AEDF729006983F1 /* File.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,11 @@
 		3C7E74F72AEDD0EA006983F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C7E74FD2AEDD0F3006983F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3C7E74FF2AEDD11E006983F1 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		3C7E75012AEDE7E2006983F1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		3C7E75062AEDE84B006983F1 /* OriginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginView.swift; sourceTree = "<group>"; };
+		3C7E75092AEDE91A006983F1 /* SlantShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlantShape.swift; sourceTree = "<group>"; };
+		3C7E750B2AEDEB07006983F1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		3C7E750D2AEDF729006983F1 /* File.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = File.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +73,10 @@
 				3C7E74E92AEDD0E9006983F1 /* AppDelegate.swift */,
 				3C7E74EB2AEDD0E9006983F1 /* SceneDelegate.swift */,
 				3C7E74ED2AEDD0E9006983F1 /* ViewController.swift */,
-				3C7E74FD2AEDD0F3006983F1 /* ContentView.swift */,
+				3C7E75012AEDE7E2006983F1 /* ViewModel.swift */,
+				3C7E750D2AEDF729006983F1 /* File.metal */,
+				3C7E75082AEDE916006983F1 /* Shapes */,
+				3C7E75052AEDE840006983F1 /* Views */,
 				3C7E74FF2AEDD11E006983F1 /* Utilities.swift */,
 				3C7E74EF2AEDD0E9006983F1 /* Main.storyboard */,
 				3C7E74F22AEDD0EA006983F1 /* Assets.xcassets */,
@@ -71,6 +84,24 @@
 				3C7E74F72AEDD0EA006983F1 /* Info.plist */,
 			);
 			path = CalHacks;
+			sourceTree = "<group>";
+		};
+		3C7E75052AEDE840006983F1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3C7E74FD2AEDD0F3006983F1 /* ContentView.swift */,
+				3C7E75062AEDE84B006983F1 /* OriginView.swift */,
+				3C7E750B2AEDEB07006983F1 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3C7E75082AEDE916006983F1 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				3C7E75092AEDE91A006983F1 /* SlantShape.swift */,
+			);
+			path = Shapes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,9 +176,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C7E74EE2AEDD0E9006983F1 /* ViewController.swift in Sources */,
+				3C7E750C2AEDEB07006983F1 /* MainView.swift in Sources */,
 				3C7E74EA2AEDD0E9006983F1 /* AppDelegate.swift in Sources */,
 				3C7E74FE2AEDD0F3006983F1 /* ContentView.swift in Sources */,
+				3C7E75072AEDE84B006983F1 /* OriginView.swift in Sources */,
+				3C7E750E2AEDF729006983F1 /* File.metal in Sources */,
 				3C7E75002AEDD11E006983F1 /* Utilities.swift in Sources */,
+				3C7E75022AEDE7E2006983F1 /* ViewModel.swift in Sources */,
+				3C7E750A2AEDE91A006983F1 /* SlantShape.swift in Sources */,
 				3C7E74EC2AEDD0E9006983F1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
